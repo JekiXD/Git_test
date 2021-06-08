@@ -2,10 +2,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -189,172 +191,89 @@ function CheckWireless(flag) {
             productList[i].Init();
     }
 }
-var Computers = (function (_super) {
-    __extends(Computers, _super);
-    function Computers(id, name, price, description, inStock, hardDisk, isGamers) {
+var Clocks = (function (_super) {
+    __extends(Clocks, _super);
+    function Clocks(id, name, price, description, inStock, isSmart) {
         var _this = _super.call(this, id, name, price, description, inStock) || this;
         _this.id = id;
         _this.name = name;
         _this.price = price;
         _this.description = description;
         _this.inStock = inStock;
-        _this.hardDisk = hardDisk;
-        _this.isGamers = isGamers;
+        _this.isSmart = isSmart;
         _this.Init();
         return _this;
     }
-    Computers.prototype.Init = function () {
+    Clocks.prototype.Init = function () {
         var obj = _super.prototype.Init.call(this);
-        if (this.isGamers) {
+        if (this.isSmart) {
             var p = document.createElement("p");
             p.setAttribute("class", "card-text text-info m-0");
-            p.innerHTML = "Для игр";
+            p.innerHTML = "Smartclock";
             obj.firstChild.firstChild.insertBefore(p, obj.firstChild.firstChild.childNodes[2]);
         }
-        if (this.hardDisk == "HDD") {
-            var p = document.createElement("p");
-            p.setAttribute("class", "card-text text-info m-0");
-            p.innerHTML = "HDD";
-            obj.firstChild.firstChild.insertBefore(p, obj.firstChild.firstChild.childNodes[2]);
-        }
-        else if (this.hardDisk == "SSD") {
-            var p = document.createElement("p");
-            p.setAttribute("class", "card-text text-info m-0");
-            p.innerHTML = "SSD";
-            obj.firstChild.firstChild.insertBefore(p, obj.firstChild.firstChild.childNodes[2]);
-        }
-        if (document.getElementById('isGamers') == null && this.isGamers != null && this.isGamers) {
+        if (document.getElementById('isSmart') == null && this.isSmart != null && this.isSmart) {
             var inp = document.createElement("input");
             inp.setAttribute("type", "checkbox");
-            inp.setAttribute("id", "isGamers");
-            inp.setAttribute("onclick", "CheckGamers(this.checked)");
+            inp.setAttribute("id", "isSmart");
+            inp.setAttribute("onclick", "CheckSmart(this.checked)");
             var lab = document.createElement("p");
             lab.appendChild(inp);
-            lab.innerHTML += "Только для игр<br>";
-            var div = document.getElementById('myTools');
-            div.appendChild(lab);
-        }
-        if (document.getElementById('hardDiskHDD') == null && this.hardDisk != null && this.hardDisk == "HDD") {
-            var inp = document.createElement("input");
-            inp.setAttribute("type", "checkbox");
-            inp.setAttribute("id", "hardDiskHDD");
-            inp.setAttribute("onclick", "CheckHardDiskHDD(this.checked)");
-            var lab = document.createElement("p");
-            lab.appendChild(inp);
-            lab.innerHTML += "HDD<br>";
-            var div = document.getElementById('myTools');
-            div.appendChild(lab);
-        }
-        else if (document.getElementById('hardDiskSSD') == null && this.hardDisk != null && this.hardDisk == "SSD") {
-            var inp = document.createElement("input");
-            inp.setAttribute("type", "checkbox");
-            inp.setAttribute("id", "hardDiskSSD");
-            inp.setAttribute("onclick", "CheckHardDiskSSD(this.checked)");
-            var lab = document.createElement("p");
-            lab.appendChild(inp);
-            lab.innerHTML += "SSD<br>";
+            lab.innerHTML += "Только для not smart watch<br>";
             var div = document.getElementById('myTools');
             div.appendChild(lab);
         }
         this.Embed(obj);
     };
-    return Computers;
+    return Clocks;
 }(Product));
-function CheckHardDiskHDD(flag) {
-    document.getElementById('rowts').innerHTML = "";
-    if (flag) {
-        for (var i = 0; i < this.productList.length; i++)
-            if (productList[i] instanceof Computers && productList[i].hardDisk == "HDD")
-                productList[i].Init();
-    }
-    else {
-        for (var i = 0; i < this.productList.length; i++)
-            productList[i].Init();
-    }
-}
-function CheckHardDiskSSD(flag) {
-    document.getElementById('rowts').innerHTML = "";
-    if (flag) {
-        for (var i = 0; i < this.productList.length; i++)
-            if (productList[i] instanceof Computers && productList[i].hardDisk == "SSD")
-                productList[i].Init();
-    }
-    else {
-        for (var i = 0; i < this.productList.length; i++)
-            productList[i].Init();
-    }
-}
-function CheckGamers(flag) {
-    document.getElementById('rowts').innerHTML = "";
-    if (flag) {
-        for (var i = 0; i < this.productList.length; i++)
-            if (productList[i] instanceof Computers && productList[i].isGamers)
-                productList[i].Init();
-    }
-    else {
-        for (var i = 0; i < this.productList.length; i++)
-            productList[i].Init();
-    }
-}
-var Clothes = (function (_super) {
-    __extends(Clothes, _super);
-    function Clothes(id, name, price, description, inStock, isMale, isFemale) {
+var Dishes = (function (_super) {
+    __extends(Dishes, _super);
+    function Dishes(id, name, price, description, inStock, isFlat) {
         var _this = _super.call(this, id, name, price, description, inStock) || this;
         _this.id = id;
         _this.name = name;
         _this.price = price;
         _this.description = description;
         _this.inStock = inStock;
-        _this.isMale = isMale;
-        _this.isFemale = isFemale;
+        _this.isFlat = isFlat;
         _this.Init();
         return _this;
     }
-    Clothes.prototype.Init = function () {
+    Dishes.prototype.Init = function () {
         var obj = _super.prototype.Init.call(this);
-        if (this.isMale) {
+        if (this.isFlat) {
             var p = document.createElement("p");
             p.setAttribute("class", "card-text text-info m-0");
-            p.innerHTML = "Мужская одежда";
+            p.innerHTML = "Flat";
             obj.firstChild.firstChild.insertBefore(p, obj.firstChild.firstChild.childNodes[2]);
         }
-        else if (this.isFemale) {
+        else {
             var p = document.createElement("p");
             p.setAttribute("class", "card-text text-info m-0");
-            p.innerHTML = "Женская одежда";
+            p.innerHTML = "Deep";
             obj.firstChild.firstChild.insertBefore(p, obj.firstChild.firstChild.childNodes[2]);
         }
-        if (document.getElementById('isMale') == null && this.isMale != null && this.isMale) {
+        if (document.getElementById('isFlat') == null && this.isFlat != null && this.isFlat) {
             var inp = document.createElement("input");
             inp.setAttribute("type", "checkbox");
-            inp.setAttribute("id", "isMale");
-            inp.setAttribute("onclick", "CheckMale(this.checked)");
+            inp.setAttribute("id", "isFlat");
+            inp.setAttribute("onclick", "CheckFlat(this.checked)");
             var lab = document.createElement("p");
             lab.appendChild(inp);
-            lab.innerHTML += "Мужская одежда<br>";
-            var div = document.getElementById('myTools');
-            div.appendChild(lab);
-        }
-        else if (document.getElementById('isFemale') == null && this.isFemale != null && this.isFemale) {
-            var inp = document.createElement("input");
-            inp.setAttribute("type", "checkbox");
-            inp.setAttribute("id", "isFemale");
-            inp.setAttribute("onclick", "CheckFemale(this.checked)");
-            var lab = document.createElement("p");
-            lab.appendChild(inp);
-            lab.innerHTML += "Женская одежда<br>";
+            lab.innerHTML += "Flat dishes<br>";
             var div = document.getElementById('myTools');
             div.appendChild(lab);
         }
         this.Embed(obj);
     };
-    return Clothes;
+    return Dishes;
 }(Product));
-function CheckMale(flag) {
+function CheckSmart(flag) {
     document.getElementById('rowts').innerHTML = "";
     if (flag) {
         for (var i = 0; i < this.productList.length; i++)
-            if (productList[i] instanceof Clothes && productList[i].isMale)
+            if (productList[i] instanceof Clocks && productList[i].isSmart)
                 productList[i].Init();
     }
     else {
@@ -362,11 +281,11 @@ function CheckMale(flag) {
             productList[i].Init();
     }
 }
-function CheckFemale(flag) {
+function CheckFlat(flag) {
     document.getElementById('rowts').innerHTML = "";
     if (flag) {
         for (var i = 0; i < this.productList.length; i++)
-            if (productList[i] instanceof Clothes && productList[i].isFemale)
+            if (productList[i] instanceof Dishes && productList[i].isFlat)
                 productList[i].Init();
     }
     else {
@@ -477,8 +396,9 @@ var productList = [
         { dimension: 43, color: Color.Pink, quantity: 1 }
     ]),
     new Balalaika(8, "Балалайка2", 217, "Обычная балалайка белорусской фирмы Змрочныя мелодыі.", 1),
-    new Computers(9, "Ноутбук Lenovo", 25000, "Прекрасный ноутбук для игр!", 10, "SSD", true),
-    new Computers(10, "Ноутбук Asus", 10000, "Прекрасный ноутбук для офиса!", 8, "HDD", false),
-    new Clothes(11, "Пальто", 1500, "Теплое зимнее пальто", 5, true, false),
-    new Clothes(11, "Куртка", 950, "Осенняя", 7, false, true),
+    new Clocks(9, "Smart Watch", 25000, "Очень дорого", 10, true),
+    new Clocks(10, "Watch", 10000, "Чуть дешевле", 8, false),
+    new Dishes(11, "Flat dish", 1500, "very flat", 5, false),
+    new Dishes(12, "Not flat dish", 950, "very deep", 7, true)
 ];
+//# sourceMappingURL=script.js.map

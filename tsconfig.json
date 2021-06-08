@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "experimentalDecorators": true,
+      "removeComments": true,
+      "sourceMap": true,
+      "watch": true,
+      "outDir": "js"
+    }, 
+    "files": ["./ts/script.ts"],
+    "compileOnSave": true 
+}
+  
